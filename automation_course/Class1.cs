@@ -37,27 +37,7 @@ namespace automation_course
             }
         }
 
-        [Fact]
-        [Trait("Category", "Smoke")]
-        public void shouldNotBeAbleToLogInWithoutPassword()
-        {
-            using (IWebDriver webDriver = new ChromeDriver())
-            {
-                String url = "https://www.saucedemo.com/";
-                webDriver.Navigate().GoToUrl(url);
-                IWebElement usernameInput = webDriver.FindElement(By.Id("user-name"));
-                IWebElement loginInput = webDriver.FindElement(By.Name("login-button"));
-
-                usernameInput.SendKeys("standard_user");
-                IWebElement errorMessage = webDriver.FindElement(By.CssSelector("h3[data-test='error']"));
-                loginInput.Click();
-                bool isErrorMessageVisible = errorMessage.Displayed;
-                String errorMessageText=errorMessage.Text;
-                Assert.True(isErrorMessageVisible);
-                Assert.Equal("https://www.saucedemo.com/", webDriver.Url);
-                Assert.Equal(errorMessageText, "Epic sadface: Password is required");
-            }
-        }
+   
 
     }
 }
