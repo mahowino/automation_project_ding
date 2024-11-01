@@ -53,14 +53,49 @@ namespace automation_course
                 usernameInput.SendKeys("standard_user");
                 loginInput.Click();
                 webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+                WebDriverWait webDriverWait = new WebDriverWait(webDriver,TimeSpan.FromSeconds(20));
 
-                IWebElement errorMessage = webDriver.FindElement(By.CssSelector("h3[data-test='error']"));
+
+                IWebElement errorMessage = webDriverWait.Until(driver=>driver.FindElement(By.CssSelector("h3[data-test='error']")));
+
 
                 bool isErrorMessageVisible = errorMessage.Displayed;
                 String errorMessageText=errorMessage.Text;
                 Assert.True(isErrorMessageVisible);
                 Assert.Equal("https://www.saucedemo.com/", webDriver.Url);
                 Assert.Equal(errorMessageText, "Epic sadface: Password is required");
+            }
+        }
+
+
+        [Fact]
+        [Trait("Category", "Smoke")]
+        public void shouldNotBeAbleToLogInWithoutUsername()
+        {
+            using (IWebDriver webDriver = new ChromeDriver())
+            {
+                String url = "https://www.saucedemo.com/";
+                var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(3));
+                webDriver.Navigate().GoToUrl(url);
+                IWebElement passwordInput = webDriver.FindElement(By.Id("password"));
+
+                IWebElement loginInput = webDriver.FindElement(By.Name("login-button"));
+
+                passwordInput.SendKeys("secret_sauce");
+
+                loginInput.Click();
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+                WebDriverWait webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
+
+
+                IWebElement errorMessage = webDriverWait.Until(driver => driver.FindElement(By.CssSelector("h3[data-test='error']")));
+
+
+                bool isErrorMessageVisible = errorMessage.Displayed;
+                String errorMessageText = errorMessage.Text;
+                Assert.True(isErrorMessageVisible);
+                Assert.Equal("https://www.saucedemo.com/", webDriver.Url);
+                Assert.Contains(errorMessageText, "Epic sadface: Username is required");
             }
         }
 
