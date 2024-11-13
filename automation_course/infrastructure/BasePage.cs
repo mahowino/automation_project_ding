@@ -25,7 +25,15 @@ namespace automation_course.infrastructure
         {
             webDriver = new ChromeDriver();
             webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(explicitWaitTime));
+            webDriver.Manage().Window.Maximize();
 
+        }
+
+        public void scrollUntilElementIsVisible(By by)
+        {
+            IWebElement element = webDriverWait.Until(driver=>driver.FindElement(by));
+            ((IJavaScriptExecutor)webDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            webDriverWait.Until(driver=>driver.FindElement(by).Displayed);
         }
 
         public void cleanUpAfterTest()

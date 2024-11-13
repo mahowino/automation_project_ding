@@ -45,7 +45,7 @@ namespace automation_course.pages.demoBlaze
 
         public void submitContactUsModal(ContactUsForm form)
         {
-            DemoBlazeContactUsModal contactUsModal = new DemoBlazeContactUsModal();
+            DemoBlazeContactUsModal contactUsModal = new ();
             contactUsModal.fillNameInput(form.nameInput);
             contactUsModal.fillEmailInput(form.emailInput);
             contactUsModal.fillMessageInput(form.messageInput);

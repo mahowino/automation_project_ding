@@ -22,8 +22,6 @@ namespace automation_course.pages.demoBlaze.components
             webDriverWait.Until(driv => driv.FindElement(contactUsModal).Displayed);
         }
 
-       
-
 
         public void fillEmailInput(string email)
         {

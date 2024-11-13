@@ -6,7 +6,7 @@ using Xunit.Sdk;
 using automation_course.pages.sauceDemo;
 using automation_course.pages.demoBlaze;
 
-namespace automation_course.tests
+namespace automation_course.tests.sauceDemoTests
 {
 
     public class sauceDemoLoginTests
@@ -18,12 +18,6 @@ namespace automation_course.tests
         private readonly string testPassword = "secret_sauce";
 
 
-
-        [Test]
-        public void loadApplicationPage()
-        {
-
-        }
 
 
         [Test]
@@ -50,8 +44,6 @@ namespace automation_course.tests
             Assert.That(sauceDemoHomePage.isErrorIsShown);
             sauceDemoHomePage.cleanUpAfterTest();
 
-
-
         }
 
 
@@ -66,8 +58,6 @@ namespace automation_course.tests
             sauceDemoHomePage.submitLoginForm();
             Assert.That(sauceDemoHomePage.isErrorIsShown);
             sauceDemoHomePage.cleanUpAfterTest();
-
-
 
         }
 
